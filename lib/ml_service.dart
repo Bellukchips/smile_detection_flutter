@@ -36,7 +36,7 @@ class MlService {
     logger.i('MlService intialized');
 
     final options = FaceDetectorOptions(
-      enableClassification: false,
+      enableClassification: true,
       enableLandmarks: true,
       performanceMode: FaceDetectorMode.accurate,
     );
