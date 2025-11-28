@@ -222,7 +222,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
               _InfoRow(
                 icon: Icons.business,
                 label: 'Department',
-                value: result.user!.departement,
+                value: result.user!.department,
               ),
               _InfoRow(
                 icon: Icons.verified,

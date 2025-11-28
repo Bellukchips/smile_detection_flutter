@@ -119,7 +119,7 @@ class _UsersListScreenState extends State<UsersListScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('ID: ${user.employeeId}'),
-                          Text('Dept: ${user.departement}'),
+                          Text('Dept: ${user.department}'),
                           Text(
                             'Registered: ${DateFormat('dd MMM yyyy').format(user.createdAt)}',
                             style: TextStyle(
@@ -193,7 +193,7 @@ class UserDetailScreen extends StatelessWidget {
             _DetailCard(
               icon: Icons.business,
               label: 'Department',
-              value: user.departement,
+              value: user.department,
             ),
             _DetailCard(
               icon: Icons.calendar_today,

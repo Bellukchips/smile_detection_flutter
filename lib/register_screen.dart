@@ -126,6 +126,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
         _capturedImagePath!,
       );
 
+      if (embedding.isEmpty) {
+        throw Exception('Embedding generation failed!');
+      }
+
       // Save photo permanently
       final directory = await getApplicationDocumentsDirectory();
       final fileName = '${const Uuid().v4()}.jpg';
@@ -137,7 +141,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         id: const Uuid().v4(),
         name: _nameController.text,
         employeeId: _employeeIdController.text,
-        departement: _departmentController.text,
+        department: _departmentController.text,
         faceEmbedding: embedding,
         photoPath: savedPath,
         createdAt: DateTime.now(),
@@ -157,7 +161,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         Navigator.pop(context);
       }
     } catch (e) {
-      _showError(e.toString());
+      _showError('ERROR SAVE USER:${e.toString()}');
     } finally {
       setState(() {
         _isProcessing = false;
