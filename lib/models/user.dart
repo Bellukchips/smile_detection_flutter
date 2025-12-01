@@ -51,7 +51,7 @@ class UserModel {
       'name': name,
       'employee_id': employeeId,
       'department': department,
-      'face_embedding': faceEmbedding,
+      'face_embedding': faceEmbedding.join(','),
       'photo_path': photoPath,
       'created_at': createdAt.toIso8601String(),
       'is_active': isActive ? 1 : 0,
@@ -70,7 +70,7 @@ class UserModel {
           .toList(),
       photoPath: map['photo_path'] as String,
       createdAt: DateTime.parse(map['created_at'] as String),
-      isActive: map['is_active'] as bool,
+      isActive: (map['is_active'] as int) == 1
     );
   }
 

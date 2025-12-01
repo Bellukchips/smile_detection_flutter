@@ -298,6 +298,16 @@ class MlService {
     return sqrt(sum);
   }
 
+  /// Check if two embeddings are similar enough to be considered a match.
+  ///
+  /// This function takes two embeddings as input and returns true if the similarity score
+  /// between them is greater than or equal to [VERIFICATION_THRESHOLD], or false otherwise.
+  ///
+  /// The similarity score is calculated using the [calculateSimilarity] function.
+  ///
+  /// The function logs a message to the logger with the similarity score for debugging purposes.
+  ///
+  /// Returns true if the two embeddings are a match, or false otherwise.
   bool isMatch(List<double> embedding1, List<double> embedding2) {
     final similarity = calculateSimilarity(embedding1, embedding2);
 
@@ -306,6 +316,19 @@ class MlService {
     return similarity >= VERIFICATION_THRESHOLD;
   }
 
+  /// Verify the face in the image at the given path against all registered users.
+  ///
+  /// This function takes an image path and a list of registered users as input.
+  /// It generates a face embedding from the image using a pre-trained model and compares
+  /// it with the face embeddings of all registered users. It returns the best match
+  /// with a confidence score above the verification threshold as a successful verification
+  /// result, or the best match with a confidence score below the verification threshold
+  /// as a failed verification result.
+  ///
+  /// If an error occurs during the verification, it returns a failed verification result
+  /// with the error message.
+  ///
+  /// Returns a future that resolves to a verification result.
   Future<VerificationResult> verifyFace(
     String imagePath,
     List<UserModel> registeredUsers,
@@ -359,6 +382,20 @@ class MlService {
     }
   }
 
+  /// Detect a smile in the given image.
+  ///
+  /// This function takes a pre-processed image as an argument and detects a smile
+  /// using a pre-trained model. If the model is not initialized, it returns false.
+  /// If the detection fails, it logs an error message and returns false.
+  ///
+  /// The function returns a future that resolves to true if a smile is detected and false
+  /// otherwise. It also calls the [onDebugInfo] callback with the number of detected faces and
+  /// the smile probability. If no faces are detected, it calls the callback with 0 as the first
+  /// argument and 0 as the second argument.
+  ///
+  /// The threshold for detecting a smile is set to [VERIFICATION_THRESHOLD]. If the smile
+  /// probability is greater than or equal to this threshold, the function returns true, otherwise it
+  /// returns false.
   Future<bool> detectSmile(InputImage inputImage) async {
     if (_faceDetector == null) {
       debugPrint('FaceDetector is not initialized.');

@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:face_detection_local/database_service.dart';
 import 'package:face_detection_local/main_page.dart';
 import 'package:face_detection_local/ml_service.dart';
+import 'package:face_detection_local/unit_test.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
@@ -18,6 +19,8 @@ Future<void> main() async {
   print('✅ Database initialized');
 
   await MlService.instance.intialized();
+
+  await runAllDatabaseTests();
   runApp(MyApp(cameras: cameras));
 }
 

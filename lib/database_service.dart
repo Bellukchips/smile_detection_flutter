@@ -12,7 +12,7 @@ class DatabaseService {
 
   Future<Database?> get database async {
     if (_database != null) {
-      Logger().e('Using existing database');
+      Logger().i('Using existing database');
       return _database;
     }
 
